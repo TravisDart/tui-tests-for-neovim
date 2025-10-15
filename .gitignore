@@ -3,3 +3,5 @@ lazy-lock.json
 .env
 **/__pycache__
 **/venv
+/pyproject.toml
+/uv.lock

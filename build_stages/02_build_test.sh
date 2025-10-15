@@ -20,9 +20,9 @@ docker build -t $PYTEST_CONTAINER_NAME -f ./tests/pytest.Dockerfile .
 # Create a uniquely-named volume containing the example workspace
 docker volume create $WORKSPACE_VOLUME_NAME
 
-# We're using the python:3.12-alpine image for this because we will have already pulled that one.
+# We're using the python:3.14-alpine image for this because we will have already pulled that one.
 docker run -it --rm -v $WORKSPACE_VOLUME_NAME:/root/workspace \
--w /root/workspace python:3.12-alpine sh -uelic '
+-w /root/workspace python:3.14-alpine sh -uelic '
 echo "numpy" > requirements.txt
 echo "import numpy" > example.py
 echo >> example.py

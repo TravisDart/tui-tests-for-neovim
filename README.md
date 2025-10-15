@@ -1,21 +1,21 @@
+# TUI Tests for Neovim
+
+This repo contains the tests for the associated project for [containerized vim](https://github.com/TravisDart/nvchad-neovim).
+
+End-to-end testing for a TUI application is quite a bit different then testing a normal console application. Rather than using pexpect or something, these tests have been implemented using libtmux running in the pytest test runner.
+
 # Run Tests:
-```
-# Install pyenv:
-curl https://pyenv.run | bash
 
-# Set up the venv
-pyenv install 3.12
-pyenv virtualenv 3.12 neovim-test
-pyenv activate neovim-test
-python -m pip install --upgrade pip
-pip install -r requirements.txt
+Running the tests against the 
 
-# Run tests: (Use -s to include output.)
-export CONTAINER_GH_TOKEN='...' 
-pytest -s
 ```
+docker compose run test
+```
+
+
 
 ## Manual testing:
+
 Before manually testing, run these commands:
 ```
 docker rmi travisdart/nvchad-neovim:latest
@@ -38,9 +38,3 @@ Then, (for all except the basic example) make sure these commands work:
 * `:!gh auth status`
 * `:!git config --global user.email`
 * `:!git config --global user.name`
-
-## Todo:
-
-* Reduce repetition in tests
-* Integrate a CI solution and separate test tasks from CI tasks.
-* Containerize the test runner

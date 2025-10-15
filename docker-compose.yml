@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  test:
+    build:
+      context: .
+      dockerfile: pytest.Dockerfile
+    working_dir: /tests
+    volumes:
+      - /tests:/tests
+
