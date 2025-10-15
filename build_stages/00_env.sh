@@ -3,7 +3,6 @@
 
 # Run this from the project root directory.
 cd "$(dirname "$0")"
-cd ../..
 
 # GH_TOKEN="..." Set this in your environment before running tests.
 GIT_AUTHOR_EMAIL="28a63484-6564-4a05-8830-b1526fdee4e0@example.com"

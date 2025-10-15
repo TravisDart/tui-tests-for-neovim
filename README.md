@@ -30,7 +30,7 @@ echo >> example.py
 echo "numpy.linalg" >> example.py
 ```
 
-Then, run the examples from the readme.
+Then, run the examples from [the readme](https://github.com/TravisDart/nvchad-neovim) for containerized vim.
 
 For each example, first test that autocomplete is working.
 
