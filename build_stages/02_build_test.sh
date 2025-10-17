@@ -4,7 +4,7 @@ source "$(dirname "$0")/00_env.sh"
 # -=-=-=-=-=-=-=-=-=-=-=-=-= Build "advanced example" containers -=-=-=-=-=-=-=-=-=-=
 for PYTHON_VERSION in "${PYTHON_VERSIONS[@]}"; do
   ADVANCED_TEST_CONTAINER_NAME="${ADVANCED_TEST_CONTAINER_PREFIX}:python${PYTHON_VERSION}"
-  BASE_CONTAINER_NAME="${BUILD_IMAGE_PREFIX}:python${PYTHON_VERSION}"
+  BASE_CONTAINER_NAME="${IMAGE_NAME}:python${PYTHON_VERSION}"
   echo
   echo "Building $ADVANCED_TEST_CONTAINER_NAME based on $BASE_CONTAINER_NAME"
   docker build --no-cache --progress=plain -t $ADVANCED_TEST_CONTAINER_NAME \
@@ -19,13 +19,11 @@ done
 docker build -t $PYTEST_CONTAINER_NAME -f ../pytest.Dockerfile ..
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-= Build the test volume -=-=-=-=-=-=-=-=-=-=-=-=
-# Create a uniquely-named volume containing the example workspace
 docker volume create $WORKSPACE_VOLUME_NAME
 
-# We're using the python:3.14-alpine image for this because we will have already pulled that one.
-
+# Populate the test volume with data (our example workspace).
 docker run -it --rm -v $WORKSPACE_VOLUME_NAME:/root/workspace \
--w /root/workspace python:3.14-alpine sh -elic '
+-w /root/workspace python:$LATEST_PYTHON_VERSION-alpine sh -elic '
 echo "numpy" > requirements.txt
 echo "import numpy" > example.py
 echo >> example.py

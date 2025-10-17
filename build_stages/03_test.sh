@@ -7,18 +7,13 @@ for PYTHON_VERSION in "${PYTHON_VERSIONS[@]}"; do
   echo
   echo "Testing Python $PYTHON_VERSION image"
 
-  docker run -it --rm --env CONTAINER_GH_TOKEN=$CONTAINER_GH_TOKEN  \
-    -v /var/run/docker.sock:/var/run/docker.sock  \
-    -v ../tests:/tests2 $PYTEST_CONTAINER_NAME \
-    bash
-
-#    pytest \
-#    --local-container-name "${TEST_CONTAINER_PREFIX}${PYTHON_VERSION}" \
-#    --advanced-example-container-name "${ADVANCED_TEST_CONTAINER_PREFIX}:python${PYTHON_VERSION}" \
-#    --git-author-email $GIT_AUTHOR_EMAIL \
-#    --git-author-name $GIT_AUTHOR_NAME \
-#    --github-token $GH_TOKEN \
-#    --workspace-volume-name $WORKSPACE_VOLUME_NAME
+   pytest \
+   --local-container-name "${TEST_CONTAINER_PREFIX}${PYTHON_VERSION}" \
+   --advanced-example-container-name "${ADVANCED_TEST_CONTAINER_PREFIX}:python${PYTHON_VERSION}" \
+   --git-author-email $GIT_AUTHOR_EMAIL \
+   --git-author-name $GIT_AUTHOR_NAME \
+   --github-token $GH_TOKEN \
+   --workspace-volume-name $WORKSPACE_VOLUME_NAME
 
   if [ $? -ne 0 ]; then
     ALL_TESTS_PASS=FALSE

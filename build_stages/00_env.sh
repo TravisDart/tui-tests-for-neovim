@@ -15,16 +15,16 @@ LATEST_PYTHON_VERSION=${PYTHON_VERSIONS[@]: -1}
 
 # If we run locally, we use a prefix to namespace our containers,
 # as the test container uses the host's Docker daemon.
-LOCAL_IMAGE_NAME="neovim-6d4289a3-8b25-44fa-a0dc-7a6612fecfdf-nvchad-neovim"
 PUBLISHED_IMAGE_NAME="travisdart/nvchad-neovim"
+LOCAL_IMAGE_NAME="neovim-6d4289a3-8b25-44fa-a0dc-7a6612fecfdf-nvchad-neovim"
 if [[ "$@" == "--published" ]]; then
-  IMAGE_PREFIX=$PUBLISHED_PREFIX"nvchad-neovim"
+  IMAGE_NAME=$PUBLISHED_IMAGE_NAME
   echo "Using published containers."
 else
-  IMAGE_PREFIX=$LOCAL_PREFIX"nvchad-neovim"
+  IMAGE_NAME=$LOCAL_IMAGE_NAME
   echo "Using local containers."
 fi
 
-PYTEST_CONTAINER_NAME="${LOCAL_PREFIX}pytest"
-WORKSPACE_VOLUME_NAME="${LOCAL_PREFIX}workspace"
-ADVANCED_TEST_CONTAINER_PREFIX="${LOCAL_PREFIX}advanced-test-container"
+PYTEST_CONTAINER_NAME="${LOCAL_IMAGE_NAME}-pytest"
+WORKSPACE_VOLUME_NAME="${LOCAL_IMAGE_NAME}-workspace"
+ADVANCED_TEST_CONTAINER_PREFIX="${LOCAL_IMAGE_NAME}-advanced-test-container"
