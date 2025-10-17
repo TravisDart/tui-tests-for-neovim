@@ -3,8 +3,8 @@ source "$(dirname "$0")/00_env.sh"
 
 # -=-=-=-=-=-=-=-=-=-=-=-=-= Build "advanced example" containers -=-=-=-=-=-=-=-=-=-=
 for PYTHON_VERSION in "${PYTHON_VERSIONS[@]}"; do
-  ADVANCED_TEST_CONTAINER_NAME="${ADVANCED_TEST_CONTAINER_PREFIX}${PYTHON_VERSION}"
-  BASE_CONTAINER_NAME="${BUILD_IMAGE_PREFIX}${PYTHON_VERSION}"
+  ADVANCED_TEST_CONTAINER_NAME="${ADVANCED_TEST_CONTAINER_PREFIX}:python${PYTHON_VERSION}"
+  BASE_CONTAINER_NAME="${BUILD_IMAGE_PREFIX}:python${PYTHON_VERSION}"
   echo
   echo "Building $ADVANCED_TEST_CONTAINER_NAME based on $BASE_CONTAINER_NAME"
   docker build --no-cache --progress=plain -t $ADVANCED_TEST_CONTAINER_NAME \
@@ -23,6 +23,7 @@ docker build -t $PYTEST_CONTAINER_NAME -f ../pytest.Dockerfile ..
 docker volume create $WORKSPACE_VOLUME_NAME
 
 # We're using the python:3.14-alpine image for this because we will have already pulled that one.
+
 docker run -it --rm -v $WORKSPACE_VOLUME_NAME:/root/workspace \
 -w /root/workspace python:3.14-alpine sh -elic '
 echo "numpy" > requirements.txt

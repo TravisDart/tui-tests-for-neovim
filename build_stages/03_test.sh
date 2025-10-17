@@ -14,7 +14,7 @@ for PYTHON_VERSION in "${PYTHON_VERSIONS[@]}"; do
 
 #    pytest \
 #    --local-container-name "${TEST_CONTAINER_PREFIX}${PYTHON_VERSION}" \
-#    --advanced-example-container-name "${ADVANCED_TEST_CONTAINER_PREFIX}${PYTHON_VERSION}" \
+#    --advanced-example-container-name "${ADVANCED_TEST_CONTAINER_PREFIX}:python${PYTHON_VERSION}" \
 #    --git-author-email $GIT_AUTHOR_EMAIL \
 #    --git-author-name $GIT_AUTHOR_NAME \
 #    --github-token $GH_TOKEN \
