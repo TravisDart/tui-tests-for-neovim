@@ -19,10 +19,8 @@ PUBLISHED_IMAGE_NAME="travisdart/nvchad-neovim"
 LOCAL_IMAGE_NAME="neovim-6d4289a3-8b25-44fa-a0dc-7a6612fecfdf-nvchad-neovim"
 if [[ "$@" == "--published" ]]; then
   IMAGE_NAME=$PUBLISHED_IMAGE_NAME
-  echo "Using published containers."
 else
   IMAGE_NAME=$LOCAL_IMAGE_NAME
-  echo "Using local containers."
 fi
 
 PYTEST_CONTAINER_NAME="${LOCAL_IMAGE_NAME}-pytest"

@@ -1,17 +1,24 @@
 #!/bin/bash
 source "$(dirname "$0")/00_env.sh"
 
-echo "Cleaning up... (Ignore any errors.)"
+echo "Cleaning up..."
 
-docker stop $(docker ps | grep $LOCAL_IMAGE_NAME | awk '{print $1}') 2>/dev/null > /dev/null
+docker stop $(docker ps | grep $LOCAL_IMAGE_NAME | awk '{print $1}')
 
 for PYTHON_VERSION in "${PYTHON_VERSIONS[@]}"; do
-  docker image rm "$LOCAL_IMAGE_NAME:$PYTHON_VERSION" 2>/dev/null > /dev/null
-  docker image rm "$PUBLISHED_IMAGE_PREFIX:$PYTHON_VERSION" 2>/dev/null > /dev/null
+  echo "Removing $LOCAL_IMAGE_NAME:python$PYTHON_VERSION"
+  docker image rm "$LOCAL_IMAGE_NAME:python$PYTHON_VERSION"
+  echo "Removing $PUBLISHED_IMAGE_PREFIX:python$PYTHON_VERSION"
+  docker image rm "$PUBLISHED_IMAGE_PREFIX:python$PYTHON_VERSION"
+  echo "Removing $LOCAL_IMAGE_NAME:python$PYTHON_VERSION"
+  docker image rm "$ADVANCED_TEST_CONTAINER_PREFIX:python$PYTHON_VERSION"
 done
-docker image rm "$LOCAL_IMAGE_NAME:latest" 2>/dev/null > /dev/null
-docker image rm "$PUBLISHED_IMAGE_PREFIX:latest" 2>/dev/null > /dev/null
-docker image rm "$PYTEST_CONTAINER_NAME" 2>/dev/null > /dev/null
-docker image rm "$ADVANCED_TEST_CONTAINER_PREFIX" 2>/dev/null > /dev/null
+echo "Removing $LOCAL_IMAGE_NAME:latest"
+docker image rm "$LOCAL_IMAGE_NAME:latest"
+echo "Removing $PUBLISHED_IMAGE_PREFIX:latest"
+docker image rm "$PUBLISHED_IMAGE_PREFIX:latest"
+echo "Removing $PYTEST_CONTAINER_NAME"
+docker image rm "$PYTEST_CONTAINER_NAME"
 
-docker volume rm $WORKSPACE_VOLUME_NAME 2>/dev/null > /dev/null
+echo "Removing $WORKSPACE_VOLUME_NAME"
+docker volume rm $WORKSPACE_VOLUME_NAME
