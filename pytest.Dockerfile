@@ -1,6 +1,11 @@
-FROM python:3.14-alpine
+FROM python:3.14-slim
 
-RUN apk add --no-cache tmux docker bash --update
+RUN apt-get update && \
+    apt-get install -y tmux bash curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install docker
+RUN curl -fsSL https://get.docker.com | sh
 
 # Install required packages.
 COPY requirements.txt /tmp

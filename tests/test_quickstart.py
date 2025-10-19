@@ -6,12 +6,11 @@ import pytest
 
 class TestQuickstart:
     @pytest.fixture(scope="class")
-    def vim(self, tmux, tmux_verbose):
-        image_name = "neovim-image:latest"
+    def vim(self, tmux, tmux_verbose, local_container_name):
         tmux.send_keys(
             dedent(
                 f"""\
-            docker run -w /root -it --rm {image_name} sh -uelic '
+            docker run -w /root -it --rm {local_container_name} sh -uelic '
             python -m venv /root/workspace_venv
             . /root/workspace_venv/bin/activate
             pip install numpy
