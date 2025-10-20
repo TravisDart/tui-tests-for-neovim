@@ -1,7 +1,8 @@
+# Another way to run neovim: docker compose run neovim
 version: '3.8'
 services:
-  test:
-    image: travisdart/nvchad-neovim:python3.12
+  neovim:
+    image: travisdart/nvchad-neovim:python3.14
     working_dir: /workspace
     volumes:
       - .:/workspace
